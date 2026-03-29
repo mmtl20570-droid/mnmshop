@@ -1,0 +1,42 @@
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2>We find<br>rare<br>pieces.</h2>
+      <p>MNM Thriftshop is a Tunisian vintage reseller specializing in authentic workwear, leather, and streetwear pieces. Every item is hand-picked, photographed, and sold exclusively through Instagram.</p>
+      <p>We don't do fast fashion. We do Carhartt. We do Timberland. We do Harley. We do the real thing.</p>
+      <div class="about-tags">
+        <span class="tag active">Vintage</span>
+        <span class="tag active">Workwear</span>
+        <span class="tag">grunge</span>
+        <span class="tag">Streetwear</span>
+        <span class="tag active">Tunisia</span>
+        <span class="tag">Resell</span>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-big-text">M&amp;M</div>
+      <div class="about-stats-grid">
+        <div class="about-stat"><div class="about-stat-num">70K+</div><div class="about-stat-label">Views / Post</div></div>
+        <div class="about-stat"><div class="about-stat-num">100%</div><div class="about-stat-label">Authentic</div></div>
+        <div class="about-stat"><div class="about-stat-num">IG</div><div class="about-stat-label">Sold via DM</div></div>
+        <div class="about-stat"><div class="about-stat-num">TN</div><div class="about-stat-label">Based Tunisia</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="contact" id="contact">
+  <h2>Find us on Instagram</h2>
+  <p>Slide into the DMs to purchase · New drops posted regularly</p>
+  <a href="https://www.instagram.com/mnm_thriftshop" target="_blank" class="contact-ig">@mnm_thriftshop</a>
+</div>
+
+<footer>
+  <div class="footer-logo">M&amp;M THRIFTSHOP</div>
+  <div class="footer-copy">© 2025 mnm_thriftshop · Tunisia · All rights reserved</div>
+</footer>
+
+
+
+</body></html>
