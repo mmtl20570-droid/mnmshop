@@ -1,3 +1,4 @@
+const IMGBB_API_KEY = "f94afa0a5c6ec1467a570e79b1ca2f14";
 // --- Firebase Configuration ---
 // Replace these with your own Firebase Project settings
 const firebaseConfig = {
@@ -291,38 +292,50 @@ async function uploadAndActivate() {
   const files = document.getElementById('item-img').files;
   const msg = document.getElementById('status-msg');
 
-  // If no new files and we are editing, just jump to saving the form data
+  // If no new files and we are editing, just save the form data
   if ((!files || files.length === 0) && activeEditId) {
     await addNewItem();
     return;
   }
 
+  // If no files and no URL, tell the user to provide something
+  if ((!files || files.length === 0) && !document.getElementById('item-url').value) {
+    alert("Please select at least one photo or provide a link.");
+    return;
+  }
+
+  // If there are no files but there is a URL, just save
   if (!files || files.length === 0) {
-    alert("Please select at least one photo (or use the manual URL field below).");
+    await addNewItem();
     return;
   }
 
   try {
     const imageUrls = [];
     const total = files.length;
+    msg.classList.add('status-active');
 
     for (let i = 0; i < total; i++) {
       const file = files[i];
-      msg.innerText = `Uploading image ${i + 1} of ${total} to Firebase...`;
-      msg.classList.add('status-active');
+      msg.innerText = `Uploading image ${i + 1} of ${total} to ImgBB...`;
 
-      // Generate a clean filename: timestamp + name
-      const fileName = `${Date.now()}_${file.name.replace(/\s+/g, '_')}`;
-      const fileRef = storage.ref().child(`inventory/${fileName}`);
+      const formData = new FormData();
+      formData.append('image', file);
 
-      // Perform upload
-      const snapshot = await fileRef.put(file);
-      const downloadUrl = await snapshot.ref.getDownloadURL();
+      const response = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+        method: 'POST',
+        body: formData
+      });
 
-      imageUrls.push(downloadUrl);
+      const result = await response.json();
+      if (result.success) {
+        imageUrls.push(result.data.url);
+      } else {
+        throw new Error(result.error.message || "ImgBB Upload Failed");
+      }
     }
 
-    msg.innerText = "All images safe in the cloud! Syncing archive...";
+    msg.innerText = "All images uploaded! Syncing database...";
     msg.classList.remove('status-active');
 
     // Store URLs as a comma-separated list for the manual field
@@ -330,8 +343,9 @@ async function uploadAndActivate() {
     await addNewItem();
 
   } catch (err) {
-    msg.innerText = "Storage Error: " + err.message;
+    msg.innerText = "Upload Error: " + err.message;
     console.error(err);
+    alert("Failed to upload: " + err.message);
   }
 }
 

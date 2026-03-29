@@ -306,15 +306,24 @@
         <option value="sold">Mark as Sold</option>
       </select>
 
-      <div style="margin: 1.5rem 0 0.5rem; text-align: left; opacity: 0.8;">
-        <label style="font-size: 0.65rem; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em;">Image
-          Automation</label>
+      <div style="margin: 1.5rem 0 0.5rem; text-align: left; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem;">
+        <label style="font-size: 0.65rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700;">
+          Add Product Media
+        </label>
       </div>
+      
+      <p style="font-size: 0.65rem; color: var(--gray); margin-bottom: 0.8rem; line-height: 1.4;">
+        Select your photos below. They will be automatically hosted for free on ImgBB.
+      </p>
 
       <input type="file" id="item-img" accept="image/*" multiple
-        style="margin-bottom: 0.5rem; border: 1px dashed var(--border); padding: 1.5rem; cursor: pointer;"
+        style="margin-bottom: 0.5rem; border: 1px dashed var(--border); padding: 1rem; cursor: pointer;"
         onchange="previewImages()">
-      <div id="image-preview-container" class="preview-strip"></div>
+      
+      <div id="image-preview-container" class="preview-strip" style="margin-bottom: 1rem;"></div>
+
+      <input type="text" id="item-url" placeholder="Alternatively, paste a direct image link here"
+        style="margin-bottom: 1rem; font-size: 0.7rem; border: 1px solid rgba(255,255,255,0.1);">
 
       <div
         style="margin: 1rem 0; display: flex; align-items: center; gap: 0.6rem; padding: 0.5rem; background: rgba(255,255,255,0.03); border-radius: 4px;">
@@ -323,33 +332,17 @@
       </div>
 
       <button id="imgbb-upload-btn" onclick="uploadAndActivate()"
-        style="margin-top: 0.5rem; background: var(--accent); color: white; border: none; font-weight: 600; box-shadow: 0 4px 15px rgba(255,107,0,0.2);">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        style="background: var(--accent); color: white; border: none; font-weight: 700; margin-top: 0.5rem; padding: 1rem;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
           style="margin-right: 8px; vertical-align: middle;">
           <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
           <polyline points="17 8 12 3 7 8"></polyline>
           <line x1="12" y1="3" x2="12" y2="15"></line>
         </svg>
-        UPLOAD & REVEAL (FIREBASE)
+        UPLOAD & SAVE TO ARCHIVE
       </button>
 
-      <div
-        style="text-align: center; margin: 1.5rem 0; font-size: 0.6rem; color: var(--gray); letter-spacing: 0.2em; opacity: 0.5;">
-        — ADVANCED / MANUAL —</div>
 
-      <input type="text" id="item-url" placeholder="Paste URL directly if already hosted"
-        style="margin-bottom: 0.8rem; font-size: 0.75rem;">
-
-      <button id="submit-item" onclick="addNewItem()"
-        style="background: rgba(255,255,255,0.05); color: var(--light); border: 1px solid var(--border); font-size: 0.7rem;">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          style="margin-right: 6px; vertical-align: middle;">
-          <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
-          <polyline points="17 21 17 13 7 13 7 21"></polyline>
-          <polyline points="7 3 7 8 15 8"></polyline>
-        </svg>
-        SAVE ENTRY TO DATABASE
-      </button>
 
       <p id="status-msg"
         style="margin-top: 1rem; font-size: 0.7rem; color: var(--accent); text-align: center; height: 1em;"></p>
