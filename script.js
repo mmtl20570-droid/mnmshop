@@ -164,8 +164,19 @@ function updateAdminView() {
 }
 
 async function loginAdmin() {
-  const email = document.getElementById('admin-email').value;
+  let email = document.getElementById('admin-email').value.trim();
   const pass = document.getElementById('admin-pass').value;
+
+  if (!email) {
+    alert("Please enter your staff ID or email.");
+    return;
+  }
+
+  // Support shorthand: if no '@' is present, assume it's '@admin.com'
+  // (adjust this domain based on your Firebase setup)
+  if (!email.includes('@')) {
+    email += "@admin.com";
+  }
 
   try {
     await auth.signInWithEmailAndPassword(email, pass);
@@ -173,7 +184,13 @@ async function loginAdmin() {
     document.getElementById('add-item-section').style.display = 'block';
     updateAdminView();
   } catch (err) {
-    alert("Login failed: " + err.message);
+    if (err.code === 'auth/invalid-email') {
+      alert("Invalid format. Please use 'admin' or your full staff email.");
+    } else if (err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+      alert("Access Denied: Incorrect staff ID or password.");
+    } else {
+      alert("Login failed: " + err.message);
+    }
   }
 }
 
